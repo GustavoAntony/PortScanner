@@ -36,6 +36,7 @@ def main():
     def scan():
         host = entry.get()
         try:
+            host_ip = socket.gethostbyname(host)
             start_port = int(entry2.get())
             end_port = int(entry3.get())
             if start_port < 0 or end_port > 65535:
@@ -44,7 +45,7 @@ def main():
                 raise ValueError("A porta inicial deve ser menor ou igual à porta final.")
             ports_range = range(start_port, end_port + 1)
             result_text.delete(1.0, tk.END) 
-            scan_ports(host, ports_range, result_text)
+            scan_ports(host_ip, ports_range, result_text)
         except ValueError as ve:
             messagebox.showerror('Erro de Entrada', str(ve))
         except Exception as e:
